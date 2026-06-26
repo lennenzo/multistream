@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NS Multistream</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <section class="screen screen-loader" id="loaderScreen">
+        <div class="loader-core">
+          <div class="loader-ring"></div>
+          <img src="./assets/logo-ns.png" alt="Logo NS" class="loader-logo" />
+          <p class="loader-text">Connexion au hub multistream...</p>
+        </div>
+      </section>
+
+      <section class="screen screen-auth hidden" id="authScreen">
+        <div class="auth-card">
+          <img src="./assets/logo-ns.png" alt="Logo NS" class="auth-logo" />
+          <div class="auth-copy">
+            <p class="eyebrow">Acces commun</p>
+            <h1>Connexion au panel NS</h1>
+            <p>Entrez le mot de passe commun pour acceder au multistream.</p>
+          </div>
+          <form id="loginForm" class="auth-form">
+            <label for="passwordInput" class="sr-only">Mot de passe</label>
+            <input
+              id="passwordInput"
+              type="password"
+              inputmode="numeric"
+              autocomplete="current-password"
+              placeholder="Mot de passe"
+              maxlength="12"
+            />
+            <button type="submit">Se connecter</button>
+          </form>
+          <p class="auth-error" id="authError" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="screen screen-app hidden" id="appScreen">
+        <header class="topbar">
+          <button
+            class="icon-button menu-button"
+            id="toggleSidebarButton"
+            type="button"
+            aria-label="Ouvrir le panneau des streamers"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <div class="brand-lockup">
+            <img src="./assets/logo-ns.png" alt="Logo NS" class="brand-logo" />
+            <div>
+              <p class="eyebrow">NS MULTISTREAM</p>
+              <h2>Centre de visionnage</h2>
+            </div>
+          </div>
+        </header>
+
+        <main class="workspace">
+          <section class="stream-stage" id="streamStage">
+            <div class="empty-state" id="emptyState">
+              <p>Aucun stream actuellement visioner</p>
+            </div>
+            <div class="stream-grid" id="streamGrid"></div>
+          </section>
+
+          <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+              <div>
+                <p class="eyebrow">Liste des streamers</p>
+                <h3>Profils disponibles</h3>
+              </div>
+              <button class="add-button" id="openAddModalButton" type="button">
+                +
+              </button>
+            </div>
+
+            <label class="search-wrap" for="searchInput">
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="Rechercher un streamer"
+              />
+            </label>
+
+            <div class="streamer-list" id="streamerList"></div>
+          </aside>
+        </main>
+      </section>
+    </div>
+
+    <div class="modal hidden" id="addStreamerModal" aria-hidden="true">
+      <div class="modal-backdrop" data-close-modal="true"></div>
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">Nouveau profil</p>
+            <h3>Ajouter un streamer</h3>
+          </div>
+          <button
+            class="close-button"
+            id="closeAddModalButton"
+            type="button"
+            aria-label="Fermer"
+          >
+            x
+          </button>
+        </div>
+
+        <form id="addStreamerForm" class="modal-form">
+          <label>
+            <span>Logo</span>
+            <input
+              id="logoInput"
+              name="logo"
+              type="url"
+              placeholder="https://..."
+              required
+            />
+          </label>
+
+          <label>
+            <span>Nom</span>
+            <input
+              id="nameInput"
+              name="name"
+              type="text"
+              placeholder="Nom du streamer"
+              maxlength="32"
+              required
+            />
+          </label>
+
+          <label>
+            <span>URL de chaine ou de live</span>
+            <input
+              id="urlInput"
+              name="url"
+              type="url"
+              placeholder="https://www.twitch.tv/..."
+              required
+            />
+          </label>
+
+          <p class="form-note">
+            Compatible avec Twitch, YouTube et liens d'embed directs.
+          </p>
+
+          <button class="submit-button" type="submit">Creer le profil</button>
+          <p class="form-error" id="formError" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
