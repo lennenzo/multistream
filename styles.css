@@ -1,19 +1,19 @@
 :root {
-  --bg: #040706;
-  --bg-soft: #0a1410;
-  --panel: rgba(6, 12, 10, 0.92);
-  --panel-strong: rgba(8, 16, 12, 0.98);
-  --line: rgba(123, 255, 178, 0.18);
-  --line-strong: rgba(123, 255, 178, 0.42);
-  --text: #eef8f2;
-  --muted: #8ea394;
-  --accent: #34f58a;
-  --accent-deep: #0f6d38;
+  --bg: #030504;
+  --bg-soft: #09100d;
+  --panel: rgba(7, 11, 10, 0.9);
+  --panel-strong: rgba(9, 14, 12, 0.98);
+  --line: rgba(123, 255, 178, 0.12);
+  --line-strong: rgba(123, 255, 178, 0.34);
+  --text: #f3faf5;
+  --muted: #94a89d;
+  --accent: #37e088;
+  --accent-deep: #145e37;
   --danger: #ea4444;
-  --shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
-  --radius-xl: 28px;
-  --radius-lg: 22px;
-  --radius-md: 16px;
+  --shadow: 0 30px 90px rgba(0, 0, 0, 0.52);
+  --radius-xl: 30px;
+  --radius-lg: 24px;
+  --radius-md: 18px;
   --radius-sm: 12px;
 }
 
@@ -26,14 +26,28 @@ body {
   margin: 0;
   min-height: 100%;
   background:
-    radial-gradient(circle at top, rgba(52, 245, 138, 0.16), transparent 24%),
-    linear-gradient(180deg, #09110d 0%, #040706 42%, #020303 100%);
+    radial-gradient(circle at top, rgba(55, 224, 136, 0.12), transparent 20%),
+    radial-gradient(circle at 20% 20%, rgba(55, 224, 136, 0.08), transparent 22%),
+    linear-gradient(180deg, #090d0b 0%, #040605 38%, #020303 100%);
   color: var(--text);
-  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
 body {
   min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.28;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
 
 button,
@@ -83,7 +97,7 @@ button {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(7, 13, 10, 0.94), rgba(3, 6, 5, 0.98));
+  background: linear-gradient(180deg, rgba(8, 13, 11, 0.95), rgba(3, 6, 5, 0.99));
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow);
 }
@@ -102,10 +116,20 @@ button {
 
 .loader-core {
   width: min(92vw, 460px);
-  padding: 44px 32px;
+  padding: 52px 32px 40px;
   display: grid;
   place-items: center;
-  gap: 20px;
+  gap: 22px;
+}
+
+.loader-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(55, 224, 136, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(55, 224, 136, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.65), transparent);
 }
 
 .loader-logo,
@@ -137,19 +161,26 @@ button {
   color: var(--muted);
 }
 
+.loader-copy {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
 .eyebrow {
   margin: 0 0 8px;
   color: var(--accent);
-  letter-spacing: 0.24em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   font-size: 0.72rem;
+  font-weight: 700;
 }
 
 .auth-card {
-  width: min(92vw, 480px);
-  padding: 34px;
+  width: min(92vw, 500px);
+  padding: 38px;
   display: grid;
-  gap: 22px;
+  gap: 24px;
 }
 
 .auth-copy h1,
@@ -157,6 +188,12 @@ button {
 .modal-header h3,
 .brand-lockup h2 {
   margin: 0;
+}
+
+.auth-copy h1 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
 }
 
 .auth-copy p:last-child {
@@ -173,11 +210,11 @@ button {
 .modal-form input,
 .search-wrap input {
   width: 100%;
-  border: 1px solid rgba(123, 255, 178, 0.15);
-  border-radius: 14px;
-  background: rgba(9, 17, 14, 0.94);
+  border: 1px solid rgba(123, 255, 178, 0.12);
+  border-radius: 16px;
+  background: rgba(9, 17, 14, 0.92);
   color: var(--text);
-  padding: 14px 16px;
+  padding: 15px 16px;
   outline: none;
 }
 
@@ -195,17 +232,23 @@ button {
 .stream-control,
 .focus-exit {
   border: 0;
-  border-radius: 14px;
-  transition: transform 160ms ease, background 160ms ease, opacity 160ms ease;
+  border-radius: 16px;
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    opacity 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .auth-form button,
 .submit-button,
 .add-button {
   min-height: 52px;
-  background: linear-gradient(180deg, var(--accent), #1ca75d);
+  background: linear-gradient(180deg, #4bf09b, #1aa65b);
   color: #031108;
   font-weight: 800;
+  box-shadow: 0 14px 34px rgba(26, 166, 91, 0.3);
 }
 
 .auth-form button:hover,
@@ -218,14 +261,22 @@ button {
 }
 
 .screen-app {
-  padding: 20px;
+  padding: 22px;
 }
 
 .topbar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 18px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
+}
+
+.topbar-main,
+.topbar-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .brand-lockup {
@@ -238,9 +289,30 @@ button {
   width: 62px;
   height: 62px;
   object-fit: contain;
-  border-radius: 18px;
+  border-radius: 20px;
   background: rgba(255, 255, 255, 0.04);
   padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.meta-chip {
+  min-width: 98px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.meta-chip strong {
+  display: block;
+  font-size: 1.2rem;
+  margin-top: 4px;
+}
+
+.meta-label {
+  color: var(--muted);
+  font-size: 0.78rem;
 }
 
 .icon-button.menu-button {
@@ -249,8 +321,9 @@ button {
   display: inline-grid;
   place-content: center;
   gap: 5px;
-  background: rgba(8, 16, 12, 0.9);
+  background: rgba(8, 16, 12, 0.92);
   border: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .menu-button span {
@@ -265,7 +338,7 @@ button {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 0;
   gap: 18px;
-  min-height: calc(100vh - 118px);
+  min-height: calc(100vh - 120px);
   transition: grid-template-columns 220ms ease;
 }
 
@@ -278,42 +351,55 @@ button {
   border: 1px solid var(--line);
   border-radius: var(--radius-xl);
   background: var(--panel);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(16px);
   box-shadow: var(--shadow);
 }
 
 .stream-stage {
   position: relative;
   min-height: 72vh;
-  padding: 18px;
+  padding: 20px;
   overflow: hidden;
 }
 
 .empty-state {
   position: absolute;
-  inset: 18px;
+  inset: 20px;
   display: grid;
   place-items: center;
   border: 1px dashed rgba(123, 255, 178, 0.16);
-  border-radius: 24px;
+  border-radius: 26px;
   background:
     radial-gradient(circle at center, rgba(52, 245, 138, 0.06), transparent 45%),
     rgba(2, 5, 4, 0.62);
 }
 
-.empty-state p {
-  margin: 0;
-  padding: 18px 22px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--muted);
+.empty-card {
+  max-width: 420px;
   text-align: center;
+}
+
+.empty-card h3,
+.empty-copy {
+  margin: 0;
+}
+
+.empty-card h3 {
+  font-size: clamp(1.45rem, 3vw, 2.2rem);
+  margin-bottom: 12px;
+  letter-spacing: -0.04em;
+}
+
+.empty-copy {
+  color: var(--muted);
+  line-height: 1.55;
 }
 
 .stream-grid {
   display: grid;
   height: 100%;
   gap: 18px;
+  align-content: stretch;
 }
 
 .stream-grid.layout-1 {
@@ -334,10 +420,11 @@ button {
 .stream-card {
   position: relative;
   min-height: 280px;
-  border-radius: 26px;
+  border-radius: 28px;
   overflow: hidden;
   border: 1px solid rgba(123, 255, 178, 0.14);
   background: linear-gradient(180deg, #09100d 0%, #030505 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .stream-card iframe {
@@ -354,8 +441,10 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 16px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.7));
+  padding: 18px;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.76)),
+    linear-gradient(90deg, rgba(2, 7, 4, 0.12), rgba(2, 7, 4, 0.4));
   opacity: 0;
   transition: opacity 180ms ease;
 }
@@ -382,10 +471,10 @@ button {
 
 .streamer-meta img,
 .streamer-list-item img {
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   object-fit: cover;
-  border-radius: 14px;
+  border-radius: 16px;
   background: rgba(255, 255, 255, 0.06);
 }
 
@@ -397,11 +486,12 @@ button {
 }
 
 .status-pill {
-  padding: 6px 10px;
+  padding: 7px 11px;
   border-radius: 999px;
   background: rgba(52, 245, 138, 0.14);
   color: #8cffb7;
   font-size: 0.78rem;
+  border: 1px solid rgba(123, 255, 178, 0.12);
 }
 
 .status-pill.offline {
@@ -421,9 +511,17 @@ button {
   min-height: 44px;
   display: inline-grid;
   place-items: center;
-  background: rgba(0, 0, 0, 0.54);
+  background: rgba(3, 5, 4, 0.7);
   color: var(--text);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.stream-control,
+.focus-exit {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
 }
 
 .stream-control.danger {
@@ -485,6 +583,12 @@ button {
   margin: 18px 0;
 }
 
+.sidebar-note {
+  margin: 0 0 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
 .streamer-list {
   display: grid;
   gap: 12px;
@@ -496,15 +600,20 @@ button {
   grid-template-columns: 56px minmax(0, 1fr) auto;
   align-items: center;
   gap: 12px;
-  padding: 12px;
+  padding: 14px;
   border-radius: 18px;
   border: 1px solid rgba(123, 255, 178, 0.12);
   background: rgba(255, 255, 255, 0.03);
   color: inherit;
   text-align: left;
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
 }
 
 .streamer-list-item:hover {
+  transform: translateY(-1px);
   background: rgba(52, 245, 138, 0.08);
   border-color: rgba(123, 255, 178, 0.26);
 }
@@ -559,6 +668,15 @@ button {
 }
 
 @media (max-width: 1080px) {
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .topbar-meta {
+    justify-content: flex-start;
+  }
+
   .workspace,
   .workspace.sidebar-open {
     grid-template-columns: minmax(0, 1fr);
@@ -583,11 +701,16 @@ button {
   }
 
   .topbar {
-    align-items: flex-start;
+    align-items: stretch;
   }
 
   .brand-lockup h2 {
     font-size: 1.05rem;
+  }
+
+  .topbar-main,
+  .topbar-meta {
+    flex-wrap: wrap;
   }
 
   .stream-stage {

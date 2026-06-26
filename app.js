@@ -26,10 +26,13 @@ const elements = {
   closeAddModalButton: document.getElementById("closeAddModalButton"),
   addStreamerModal: document.getElementById("addStreamerModal"),
   addStreamerForm: document.getElementById("addStreamerForm"),
+  nameInput: document.getElementById("nameInput"),
   formError: document.getElementById("formError"),
   streamGrid: document.getElementById("streamGrid"),
   emptyState: document.getElementById("emptyState"),
   streamStage: document.getElementById("streamStage"),
+  streamerCount: document.getElementById("streamerCount"),
+  liveCount: document.getElementById("liveCount"),
 };
 
 function createDefaultStreamers() {
@@ -162,6 +165,7 @@ function isActive(streamerId) {
 
 function renderStreamerList() {
   const filtered = getFilteredStreamers();
+  elements.streamerCount.textContent = String(state.streamers.length);
 
   if (!filtered.length) {
     elements.streamerList.innerHTML =
@@ -189,6 +193,7 @@ function renderStreamerList() {
 
 function renderStreams() {
   const count = state.activeStreams.length;
+  elements.liveCount.textContent = String(count);
   elements.emptyState.classList.toggle("hidden", count > 0);
   elements.streamGrid.className = `stream-grid ${count ? `layout-${Math.min(count, 6)}` : ""}`;
 
@@ -202,7 +207,7 @@ function renderStreams() {
     .map((streamer) => {
       const focused = state.focusId === streamer.id;
       const embedData = parsePlatform(streamer.url);
-      const statusText = embedData?.platform === "twitch" ? "Canal connecte" : "Flux charge";
+      const statusText = embedData?.platform === "twitch" ? "Canal charge" : "Flux charge";
 
       return `
         <article class="stream-card ${focused ? "focus-mode" : ""}" data-stream-id="${streamer.id}">
@@ -225,13 +230,13 @@ function renderStreams() {
               <span class="status-pill">${statusText}</span>
             </div>
             <div class="stream-overlay-bottom">
-              <span class="stream-label">Survol pour les controles</span>
+              <span class="stream-label">Controles rapides</span>
               <div class="stream-actions">
                 <button class="stream-control" type="button" data-action="focus" data-stream-id="${streamer.id}" aria-label="Mettre en grand ecran">
-                  ⛶
+                  FULL
                 </button>
                 <button class="stream-control danger" type="button" data-action="remove" data-stream-id="${streamer.id}" aria-label="Supprimer le live">
-                  ↪
+                  EXIT
                 </button>
               </div>
             </div>
@@ -255,7 +260,7 @@ function renderFocusExitButton() {
   button.type = "button";
   button.id = "focusExitButton";
   button.className = "focus-exit";
-  button.textContent = "←";
+  button.textContent = "BACK";
   button.setAttribute("aria-label", "Quitter le grand ecran");
   button.addEventListener("click", () => {
     state.focusId = null;
@@ -300,6 +305,7 @@ function toggleSidebar() {
 function openModal() {
   elements.addStreamerModal.classList.remove("hidden");
   elements.addStreamerModal.setAttribute("aria-hidden", "false");
+  elements.nameInput?.focus?.();
 }
 
 function closeModal() {
@@ -362,6 +368,9 @@ function handleLogin(event) {
 
   elements.authError.textContent = "";
   showScreen(elements.appScreen);
+  if (window.innerWidth > 1080) {
+    elements.workspace.classList.add("sidebar-open");
+  }
   renderStreamerList();
   renderStreams();
 }

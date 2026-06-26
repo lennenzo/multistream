@@ -10,9 +10,13 @@
     <div class="app-shell">
       <section class="screen screen-loader" id="loaderScreen">
         <div class="loader-core">
+          <div class="loader-grid"></div>
           <div class="loader-ring"></div>
           <img src="./assets/logo-ns.png" alt="Logo NS" class="loader-logo" />
-          <p class="loader-text">Connexion au hub multistream...</p>
+          <div class="loader-copy">
+            <p class="eyebrow">NS MULTISTREAM</p>
+            <p class="loader-text">Connexion au hub multistream...</p>
+          </div>
         </div>
       </section>
 
@@ -42,21 +46,33 @@
 
       <section class="screen screen-app hidden" id="appScreen">
         <header class="topbar">
-          <button
-            class="icon-button menu-button"
-            id="toggleSidebarButton"
-            type="button"
-            aria-label="Ouvrir le panneau des streamers"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-          <div class="brand-lockup">
-            <img src="./assets/logo-ns.png" alt="Logo NS" class="brand-logo" />
-            <div>
-              <p class="eyebrow">NS MULTISTREAM</p>
-              <h2>Centre de visionnage</h2>
+          <div class="topbar-main">
+            <button
+              class="icon-button menu-button"
+              id="toggleSidebarButton"
+              type="button"
+              aria-label="Ouvrir le panneau des streamers"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <div class="brand-lockup">
+              <img src="./assets/logo-ns.png" alt="Logo NS" class="brand-logo" />
+              <div>
+                <p class="eyebrow">NS MULTISTREAM</p>
+                <h2>Centre de visionnage</h2>
+              </div>
+            </div>
+          </div>
+          <div class="topbar-meta">
+            <div class="meta-chip">
+              <span class="meta-label">Profils</span>
+              <strong id="streamerCount">0</strong>
+            </div>
+            <div class="meta-chip">
+              <span class="meta-label">Ouverts</span>
+              <strong id="liveCount">0</strong>
             </div>
           </div>
         </header>
@@ -64,7 +80,13 @@
         <main class="workspace">
           <section class="stream-stage" id="streamStage">
             <div class="empty-state" id="emptyState">
-              <p>Aucun stream actuellement visioner</p>
+              <div class="empty-card">
+                <p class="eyebrow">Aucun live ouvert</p>
+                <h3>Aucun stream actuellement visioner</h3>
+                <p class="empty-copy">
+                  Ouvre le panneau a droite puis choisis un streamer pour commencer.
+                </p>
+              </div>
             </div>
             <div class="stream-grid" id="streamGrid"></div>
           </section>
@@ -88,6 +110,9 @@
               />
             </label>
 
+            <p class="sidebar-note">
+              Ajoute tes profils puis clique sur un streamer pour afficher son live.
+            </p>
             <div class="streamer-list" id="streamerList"></div>
           </aside>
         </main>
